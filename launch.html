@@ -1,11 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Embed Tests</title>
+  <meta name="description" content="Simple page with iframe embeds and a monitor test link." />
+  <style>
+    /* Minimal, responsive styling */
+    :root {
+      --max-width: 1200px;
+      --gap: 1rem;
+      --bg: #f7f8fa;
+      --card: #fff;
+      --muted: #556;
+    }
+    html,body { height:100%; margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background:var(--bg); color:#111; }
+    .wrap { max-width:var(--max-width); margin:1.5rem auto; padding:1rem; display:grid; gap:var(--gap); }
+    h1 { margin:0 0 .25rem 0; font-size:1.25rem; }
+    p.lead { margin:0 0 .75rem 0; color:var(--muted); font-size:0.95rem; }
+    .frame-card { background:var(--card); border-radius:8px; box-shadow:0 1px 4px rgba(0,0,0,.06); padding:.75rem; }
+    .frame-wrap { position:relative; width:100%; padding-top:56.25%; /* 16:9 ratio */ overflow:hidden; border-radius:6px; background:#000; }
+    .frame-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .actions { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; margin-top:.5rem; }
+    a.button { display:inline-block; padding:.45rem .6rem; background:#0a66c2; color:#fff; text-decoration:none; border-radius:6px; font-size:.9rem; }
+    .note { font-size:.85rem; color:#666; }
+    @media (min-width:1000px) {
+      .two { display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); align-items:start; }
+      .frame-wrap { padding-top:60%; } /* adjust ratio on wide screens */
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap" role="main">
+    <header>
+      <h1>Embed / Monitor Tests</h1>
+      <p class="lead">Responsive iframe embeds. If a site refuses embedding (X-Frame-Options / CSP), the iframe will be blocked — open it in a new tab instead.</p>
+    </header>
 
-<html>
-	<body>
-		<iframe src="https://retest.us" height="800" width="1200" title="Iframe Example"></iframe>
-		
-		<iframe src="https://superteachertools.us/soundCheck" height="800" width="1200" title="Iframe Example"></iframe>
+    <section class="two">
+      <div class="frame-card" aria-labelledby="retestTitle">
+        <h2 id="retestTitle" style="font-size:1rem;margin:.15rem 0 .5rem 0;">retest.us</h2>
+        <div class="frame-wrap" title="retest.us embed">
+          <iframe src="https://retest.us/" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                  title="retest.us interactive area">
+            <!-- Fallback content for browsers that do not support iframes -->
+            This content is best viewed in a browser that supports iframes. Open the site directly:
+            <a href="https://retest.us/" target="_blank" rel="noopener noreferrer">retest.us</a>
+          </iframe>
+        </div>
+        <div class="actions">
+          <a class="button" href="https://retest.us/" target="_blank" rel="noopener noreferrer">Open in new tab</a>
+          <span class="note">If the iframe is blocked, use the button above.</span>
+        </div>
+      </div>
 
-		<a href="https://eizo.be/monitor-test/" target="_blank">Monitor Test</a>	
-	</body>
+      <div class="frame-card" aria-labelledby="superTitle">
+        <h2 id="superTitle" style="font-size:1rem;margin:.15rem 0 .5rem 0;">SuperTeacherTools — Sound Check</h2>
+        <div class="frame-wrap" title="superteachertools embed">
+          <iframe src="https://superteachertools.us/soundCheck" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                  title="SuperTeacherTools sound check">
+            This content is best viewed in a browser that supports iframes. Open the site directly:
+            <a href="https://superteachertools.us/soundCheck" target="_blank" rel="noopener noreferrer">sound check</a>
+          </iframe>
+        </div>
+        <div class="actions">
+          <a class="button" href="https://superteachertools.us/soundCheck" target="_blank" rel="noopener noreferrer">Open in new tab</a>
+          <span class="note">If the iframe is blocked, use the button above.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="frame-card" aria-labelledby="monitorTitle">
+      <h2 id="monitorTitle" style="font-size:1rem;margin:.15rem 0 .5rem 0;">Monitor Test</h2>
+      <p class="note">Opens in a new tab (recommended for best compatibility).</p>
+      <a class="button" href="https://eizo.be/monitor-test/" target="_blank" rel="noopener noreferrer">Open Monitor Test</a>
+    </section>
+
+    <footer class="note" style="margin-top:.75rem;">
+      Note: Some sites send headers (X-Frame-Options or strict CSP) that prevent embedding — this is normal and outside the control of GitHub Pages.
+    </footer>
+  </main>
+</body>
 </html>
+
