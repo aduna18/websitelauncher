@@ -36,6 +36,27 @@
       <h1>Embed / Monitor Tests</h1>
       <p class="lead">Responsive iframe embeds. If a site refuses embedding (X-Frame-Options / CSP), the iframe will be blocked — open it in a new tab instead.</p>
     </header>
+<!-- Buttons -->
+<div class="actions">
+  <a class="button" id="open-retest" href="https://retest.us/" target="_blank" rel="noopener noreferrer">Open in new tab</a>
+  <a class="button" id="open-super" href="https://superteachertools.us/soundCheck" target="_blank" rel="noopener noreferrer">Open in new tab</a>
+  <a class="button" id="open-eizo" href="https://eizo.be/monitor-test/" target="_blank" rel="noopener noreferrer">Open Monitor Test</a>
+  <button class="button" id="open-all" type="button">Open all</button>
+</div>
+
+<script>
+document.getElementById('open-all').addEventListener('click', function () {
+  const urls = [
+    'https://retest.us/',
+    'https://superteachertools.us/soundCheck',
+    'https://eizo.be/monitor-test/'
+  ];
+  // Open each in a new tab without giving the new page a reference to this one.
+  urls.forEach(u => window.open(u, '_blank', 'noopener,noreferrer'));
+  // Remove focus from this page so the browser stays on the current tab.
+  try { window.focus(); } catch(e) {}
+});
+</script>
 
     <section class="two">
       <div class="frame-card" aria-labelledby="retestTitle">
